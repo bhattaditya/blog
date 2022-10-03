@@ -1,6 +1,7 @@
 package github.bhattaditya.blog.controller;
 
 import github.bhattaditya.blog.dto.requestDto.UserRequestDto;
+import github.bhattaditya.blog.dto.responseDto.ApiResponse;
 import github.bhattaditya.blog.dto.responseDto.UserResponseDto;
 import github.bhattaditya.blog.service.UserService;
 import org.slf4j.Logger;
@@ -54,9 +55,9 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/remove/{userId}")
-    public ResponseEntity<UserResponseDto> deleteUser(@PathVariable String userId) {
+    public ResponseEntity<ApiResponse> deleteUser(@PathVariable String userId) {
         LOGGER.info("User controller calling User Service class...");
         userService.deleteUser(userId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity(new ApiResponse("User deleted Successfully", true), HttpStatus.OK);
     }
 }

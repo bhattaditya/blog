@@ -3,6 +3,7 @@ package github.bhattaditya.blog.service;
 import github.bhattaditya.blog.dto.mapper;
 import github.bhattaditya.blog.dto.requestDto.UserRequestDto;
 import github.bhattaditya.blog.dto.responseDto.UserResponseDto;
+import github.bhattaditya.blog.exception.ResourceNotFoundException;
 import github.bhattaditya.blog.model.User;
 import github.bhattaditya.blog.repository.UserRepository;
 import org.slf4j.Logger;
@@ -63,11 +64,11 @@ public class UserService {
     public User getUser(String userId) {
 
         return userRepository.findById(Long.parseLong(userId))
-                .orElseThrow(()-> new IllegalStateException("User with ID: " + userId + " not found"));
+                .orElseThrow(()-> new ResourceNotFoundException("User", "ID", userId));
     }
 
     public void deleteUser(String userId) {
-        LOGGER.info("In User Service class... deleting user");
+        LOGGER.info("In User Service class... deleting user with ID: " + userId);
         User user = getUser(userId);
         userRepository.delete(user);
         LOGGER.info("User deleted successfully!");
