@@ -58,6 +58,6 @@ public class UserController {
     public ResponseEntity<ApiResponse> deleteUser(@PathVariable String userId) {
         LOGGER.info("User controller calling User Service class...");
         userService.deleteUser(userId);
-        return new ResponseEntity(new ApiResponse("User deleted Successfully", true), HttpStatus.OK);
+        return new ResponseEntity<>(new ApiResponse("User deleted Successfully", true), HttpStatus.OK);
     }
 }
