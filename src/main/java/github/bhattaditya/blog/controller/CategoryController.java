@@ -27,38 +27,38 @@ public class CategoryController {
     }
 
     @PostMapping(value = "/addCategory")
-    public ResponseEntity<CategoryResponseDto> addUser(@Valid @RequestBody CategoryRequestDto categoryRequestDto) {
+    public ResponseEntity<CategoryResponseDto> addCategory(@Valid @RequestBody CategoryRequestDto categoryRequestDto) {
         LOGGER.info("Category controller calling Category Service class...");
         CategoryResponseDto categoryResponseDto = categoryService.createCategory(categoryRequestDto);
         return new ResponseEntity<>(categoryResponseDto, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/get/{categoryId}")
-    public ResponseEntity<CategoryResponseDto> getUser(@PathVariable String categoryId) {
+    public ResponseEntity<CategoryResponseDto> getCategory(@PathVariable String categoryId) {
         LOGGER.info("Category controller calling Category Service class...");
         CategoryResponseDto categoryResponseDto = categoryService.getCategoryById(categoryId);
         return new ResponseEntity<>(categoryResponseDto, HttpStatus.OK);
     }
 
     @GetMapping(value = "/getAll")
-    public ResponseEntity<List<CategoryResponseDto>> getUsers() {
+    public ResponseEntity<List<CategoryResponseDto>> getCategories() {
         LOGGER.info("Category controller calling Category Service class...");
         List<CategoryResponseDto> categoryResponseDtos = categoryService.getCategories();
         return new ResponseEntity<>(categoryResponseDtos, HttpStatus.OK);
     }
 
     @PutMapping(value = "/update/{categoryId}")
-    public ResponseEntity<CategoryResponseDto> updateUser(@PathVariable String categoryId, @RequestBody CategoryRequestDto categoryRequestDto) {
+    public ResponseEntity<CategoryResponseDto> updateCategories(@PathVariable String categoryId, @RequestBody CategoryRequestDto categoryRequestDto) {
         LOGGER.info("Category controller calling Category Service class...");
         CategoryResponseDto categoryResponseDto = categoryService.updateCategory(categoryId, categoryRequestDto);
         return new ResponseEntity<>(categoryResponseDto, HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping(value = "/remove/{categoryId}")
-    public ResponseEntity<ApiResponse> deleteUser(@PathVariable String categoryId) {
+    public ApiResponse deleteCategories(@PathVariable String categoryId) {
         LOGGER.info("Category controller calling Category Service class...");
         categoryService.deleteCategory(categoryId);
-        return new ResponseEntity<>(new ApiResponse("Category deleted Successfully", true), HttpStatus.OK);
+        return new ApiResponse("Category deleted Successfully", true);
     }
 
 

@@ -28,7 +28,7 @@ public class UserService {
     public UserResponseDto createUser(UserRequestDto userRequestDto) {
         LOGGER.info("In User Service class... creating user");
         User user = new User();
-        user.setName(userRequestDto.getName());
+        user.setUsername(userRequestDto.getUsername());
         user.setPassword(userRequestDto.getPassword());
         user.setEmail(userRequestDto.getEmail());
 
@@ -41,7 +41,7 @@ public class UserService {
     public UserResponseDto updateUser(String userId, UserRequestDto userRequestDto) {
         LOGGER.info("In User Service class... updating user");
         User editUser = getUser(userId);
-        editUser.setName(userRequestDto.getName());
+        editUser.setUsername(userRequestDto.getUsername());
         editUser.setPassword(userRequestDto.getPassword());
         editUser.setEmail(userRequestDto.getEmail());
         LOGGER.info("User details updated successfully!");
