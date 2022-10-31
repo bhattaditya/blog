@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping(value = "/posts")
 public class PostController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PostService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PostController.class);
 
     @Autowired
     private PostService postService;
