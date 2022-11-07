@@ -1,5 +1,7 @@
 package github.bhattaditya.blog.controller;
 
+import github.bhattaditya.blog.constants.BlogApiConstants;
+import github.bhattaditya.blog.constants.BlogConstants;
 import github.bhattaditya.blog.dto.requestDto.PostRequestDto;
 import github.bhattaditya.blog.dto.responseDto.ApiResponse;
 import github.bhattaditya.blog.dto.responseDto.PostResponseDto;
@@ -15,7 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/posts")
+@RequestMapping(value = BlogConstants.BLOG_POST)
 public class PostController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PostController.class);
@@ -23,7 +25,7 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @PostMapping(value = "/addPost/user/{userId}/category/{categoryId}")
+    @PostMapping(value = BlogApiConstants.CREATE_POST)
     public ResponseEntity<PostResponseDto> createPost(
             @PathVariable String userId,
             @PathVariable String categoryId,
@@ -35,7 +37,7 @@ public class PostController {
         return new ResponseEntity<>(postResponseDto, HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/getAll")
+    @GetMapping(value = BlogApiConstants.POSTS)
     public ResponseEntity<List<PostResponseDto>> getPosts() {
         LOGGER.info("Post controller calling Post Service class...");
         List<PostResponseDto> postResponseDtos = postService.getPosts();
@@ -43,7 +45,7 @@ public class PostController {
         return new ResponseEntity<>(postResponseDtos, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/get/{postId}")
+    @GetMapping(value = BlogApiConstants.POST)
     public ResponseEntity<PostResponseDto> getPostById(@PathVariable String postId) {
         LOGGER.info("Post controller calling Post Service class...");
         PostResponseDto postResponseDto = postService.getPostById(postId);
@@ -51,7 +53,7 @@ public class PostController {
         return new ResponseEntity<>(postResponseDto, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/get/category/{categoryId}")
+    @GetMapping(value = BlogApiConstants.POST_CATEGORY)
     public ResponseEntity<List<PostResponseDto>> getPostsByCategory(@PathVariable String categoryId) {
         LOGGER.info("Post controller calling Post Service class...");
         List<PostResponseDto> postResponseDtos = postService.postByCategory(categoryId);
@@ -59,7 +61,7 @@ public class PostController {
         return new ResponseEntity<>(postResponseDtos, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/get/user/{userId}")
+    @GetMapping(value = BlogApiConstants.POST_USER)
     public ResponseEntity<List<PostResponseDto>> getPostsByUser(@PathVariable String userId) {
         LOGGER.info("Post controller calling Post Service class...");
         List<PostResponseDto> postResponseDtos = postService.postsByUser(userId);
@@ -67,7 +69,7 @@ public class PostController {
         return new ResponseEntity<>(postResponseDtos, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/update/{postId}")
+    @PutMapping(value = BlogApiConstants.UPDATE_POST)
     public ResponseEntity<PostResponseDto> updatePost(
             @PathVariable String postId,
             @RequestBody PostRequestDto postRequestDto) {
@@ -77,7 +79,7 @@ public class PostController {
         return new ResponseEntity<>(postResponseDto, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/remove/{postId}")
+    @DeleteMapping(value = BlogApiConstants.REMOVE_POST)
     public ApiResponse deletePost (@PathVariable String postId) {
         LOGGER.info("Post controller calling Post Service class...");
         postService.deletePost(postId);

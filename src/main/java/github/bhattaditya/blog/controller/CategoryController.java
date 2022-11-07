@@ -1,5 +1,7 @@
 package github.bhattaditya.blog.controller;
 
+import github.bhattaditya.blog.constants.BlogApiConstants;
+import github.bhattaditya.blog.constants.BlogConstants;
 import github.bhattaditya.blog.dto.requestDto.CategoryRequestDto;
 import github.bhattaditya.blog.dto.responseDto.ApiResponse;
 import github.bhattaditya.blog.dto.responseDto.CategoryResponseDto;
@@ -15,7 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/categories")
+@RequestMapping(value = BlogConstants.BLOG_CATEGORY)
 public class CategoryController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoryController.class);
@@ -26,35 +28,35 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @PostMapping(value = "/addCategory")
+    @PostMapping(value = BlogApiConstants.CREATE_CATEGORY)
     public ResponseEntity<CategoryResponseDto> addCategory(@Valid @RequestBody CategoryRequestDto categoryRequestDto) {
         LOGGER.info("Category controller calling Category Service class...");
         CategoryResponseDto categoryResponseDto = categoryService.createCategory(categoryRequestDto);
         return new ResponseEntity<>(categoryResponseDto, HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/get/{categoryId}")
+    @GetMapping(value = BlogApiConstants.CATEGORY)
     public ResponseEntity<CategoryResponseDto> getCategory(@PathVariable String categoryId) {
         LOGGER.info("Category controller calling Category Service class...");
         CategoryResponseDto categoryResponseDto = categoryService.getCategoryById(categoryId);
         return new ResponseEntity<>(categoryResponseDto, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/getAll")
+    @GetMapping(value = BlogApiConstants.CATEGORIES)
     public ResponseEntity<List<CategoryResponseDto>> getCategories() {
         LOGGER.info("Category controller calling Category Service class...");
         List<CategoryResponseDto> categoryResponseDtos = categoryService.getCategories();
         return new ResponseEntity<>(categoryResponseDtos, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/update/{categoryId}")
+    @PutMapping(value = BlogApiConstants.UPDATE_CATEGORY)
     public ResponseEntity<CategoryResponseDto> updateCategories(@PathVariable String categoryId, @RequestBody CategoryRequestDto categoryRequestDto) {
         LOGGER.info("Category controller calling Category Service class...");
         CategoryResponseDto categoryResponseDto = categoryService.updateCategory(categoryId, categoryRequestDto);
         return new ResponseEntity<>(categoryResponseDto, HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping(value = "/remove/{categoryId}")
+    @DeleteMapping(value = BlogApiConstants.REMOVE_CATEGORY)
     public ApiResponse deleteCategories(@PathVariable String categoryId) {
         LOGGER.info("Category controller calling Category Service class...");
         categoryService.deleteCategory(categoryId);
