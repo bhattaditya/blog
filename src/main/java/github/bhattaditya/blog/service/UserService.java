@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -31,6 +32,8 @@ public class UserService {
         user.setUsername(userRequestDto.getUsername());
         user.setPassword(userRequestDto.getPassword());
         user.setEmail(userRequestDto.getEmail());
+        user.setCreatedBy(null);
+        user.setCreatedDate(LocalDateTime.now());
 
         userRepository.save(user);
         LOGGER.info("User created successfully!");
@@ -44,8 +47,10 @@ public class UserService {
         editUser.setUsername(userRequestDto.getUsername());
         editUser.setPassword(userRequestDto.getPassword());
         editUser.setEmail(userRequestDto.getEmail());
-        LOGGER.info("User details updated successfully!");
+        editUser.setModifiedBy(null);
+        editUser.setModifiedDate(LocalDateTime.now());
 
+        LOGGER.info("User details updated successfully!");
         return mapper.userToUserResponseDto(editUser);
     }
 

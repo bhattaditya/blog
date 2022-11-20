@@ -15,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class CommentService {
 
@@ -41,7 +43,9 @@ public class CommentService {
         comment.setContent(commentRequestDto.getContent());
         comment.setPost(post);
         comment.setUser(user);
+        comment.setCreatedDate(LocalDateTime.now());
         commentRepository.save(comment);
+
         LOGGER.info("comment saved...");
         return mapper.commentToCommentResponseDto(comment);
     }

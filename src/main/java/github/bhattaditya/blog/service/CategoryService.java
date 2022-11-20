@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -27,9 +28,11 @@ public class CategoryService {
         Category category = new Category();
         category.setTitle(categoryRequestDto.getTitle());
         category.setDescription(categoryRequestDto.getDescription());
+        category.setCreatedDate(LocalDateTime.now());
+        category.setCreatedBy(null);
         categoryRepository.save(category);
-        LOGGER.info("Category created");
 
+        LOGGER.info("Category created");
         return mapper.categoryToCategoryResponse(category);
     }
 
@@ -39,8 +42,10 @@ public class CategoryService {
         Category categoryToUpdate = getCategory(categoryId);
         categoryToUpdate.setTitle(categoryRequestDto.getTitle());
         categoryToUpdate.setDescription(categoryRequestDto.getDescription());
-        LOGGER.info("Category updated successfully!");
+        categoryToUpdate.setModifiedDate(LocalDateTime.now());
+        categoryToUpdate.setModifiedBy(null);
 
+        LOGGER.info("Category updated successfully!");
         return mapper.categoryToCategoryResponse(categoryToUpdate);
     }
 

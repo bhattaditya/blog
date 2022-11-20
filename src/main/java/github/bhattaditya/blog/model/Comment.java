@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "tbl_comment")
 @Data
-public class Comment {
+public class Comment extends baseObject{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

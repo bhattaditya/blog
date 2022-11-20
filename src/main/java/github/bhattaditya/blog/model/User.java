@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "tbl_user")
 @Data
 @NoArgsConstructor
-public class User {
+public class User extends baseObject{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

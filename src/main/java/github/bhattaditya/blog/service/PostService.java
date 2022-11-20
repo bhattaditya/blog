@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -46,6 +47,9 @@ public class PostService {
         post.setUser(user);
         post.setCategory(category);
         post.setImageURL(postRequestDto.getImageURL());
+        post.setCreatedBy(user.getUsername());
+        post.setCreatedDate(LocalDateTime.now());
+
         postRepository.save(post);
         LOGGER.info("Post Saved");
 
@@ -80,8 +84,10 @@ public class PostService {
         post.setTitle(postRequestDto.getTitle());
         post.setContent(postRequestDto.getContent());
         post.setImageURL(postRequestDto.getImageURL());
-        LOGGER.info("Post Updated!");
+        post.setModifiedBy(null);
+        post.setModifiedDate(LocalDateTime.now());
 
+        LOGGER.info("Post Updated!");
         return mapper.postToPostResponseDto(post);
     }
 

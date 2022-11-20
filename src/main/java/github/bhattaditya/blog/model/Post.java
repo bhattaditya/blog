@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "tbl_post")
 @Data
 @NoArgsConstructor
-public class Post {
+public class Post extends baseObject{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
