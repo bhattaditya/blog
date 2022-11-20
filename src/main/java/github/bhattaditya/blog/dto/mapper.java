@@ -1,9 +1,11 @@
 package github.bhattaditya.blog.dto;
 
 import github.bhattaditya.blog.dto.responseDto.CategoryResponseDto;
+import github.bhattaditya.blog.dto.responseDto.CommentResponseDto;
 import github.bhattaditya.blog.dto.responseDto.PostResponseDto;
 import github.bhattaditya.blog.dto.responseDto.UserResponseDto;
 import github.bhattaditya.blog.model.Category;
+import github.bhattaditya.blog.model.Comment;
 import github.bhattaditya.blog.model.Post;
 import github.bhattaditya.blog.model.User;
 
@@ -56,6 +58,7 @@ public class mapper {
         postResponseDto.setContent(post.getContent());
         postResponseDto.setUser(userToUserResponseDto(post.getUser()));
         postResponseDto.setCategory(categoryToCategoryResponse(post.getCategory()));
+        postResponseDto.setComments(commentToCommentResponseDtos(post.getComments()));
 
         return postResponseDto;
     }
@@ -67,5 +70,24 @@ public class mapper {
         }
 
         return postResponseDtos;
+    }
+
+    public static CommentResponseDto commentToCommentResponseDto(Comment comment) {
+        CommentResponseDto commentResponseDto = new CommentResponseDto();
+        commentResponseDto.setId(comment.getId());
+        commentResponseDto.setContent(comment.getContent());
+        commentResponseDto.setUser(userToUserResponseDto(comment.getUser()));
+
+        return commentResponseDto;
+    }
+
+    public static List<CommentResponseDto> commentToCommentResponseDtos(List<Comment> comments) {
+        List<CommentResponseDto> commentResponseDtos = new ArrayList<>();
+
+        for (Comment comment: comments) {
+            commentResponseDtos.add(commentToCommentResponseDto(comment));
+        }
+
+        return commentResponseDtos;
     }
 }

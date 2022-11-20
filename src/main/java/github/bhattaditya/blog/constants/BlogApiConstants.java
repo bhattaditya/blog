@@ -38,4 +38,9 @@ public class BlogApiConstants {
     public static final String UPDATE_CATEGORY = "/update/{categoryId}";
 
     public static final String REMOVE_CATEGORY = "/remove/{categoryId}";
+
+    // COMMENT
+    public static final String CREATE_COMMENT = "user/{userId}/post/{postId}/addComment";
+
+    public static final String REMOVE_COMMENT = "/remove/{commentId}";
 }

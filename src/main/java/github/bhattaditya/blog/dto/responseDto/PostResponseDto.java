@@ -1,8 +1,9 @@
 package github.bhattaditya.blog.dto.responseDto;
 
-import github.bhattaditya.blog.model.Category;
-import github.bhattaditya.blog.model.User;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class PostResponseDto {
@@ -12,4 +13,5 @@ public class PostResponseDto {
     private String imageURL;
     private CategoryResponseDto category;
     private UserResponseDto user;
+    private List<CommentResponseDto> comments = new ArrayList<>();
 }
