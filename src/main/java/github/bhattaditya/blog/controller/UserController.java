@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @PutMapping(value = BlogApiConstants.UPDATE_USER)
-    public ResponseEntity<UserResponseDto> updateUser(@PathVariable String userId, @RequestBody UserRequestDto userRequestDto) {
+    public ResponseEntity<UserResponseDto> updateUser(@PathVariable String userId, @Valid @RequestBody UserRequestDto userRequestDto) {
         LOGGER.info("User controller calling User Service class...");
         UserResponseDto userResponseDto = userService.updateUser(userId, userRequestDto);
         return new ResponseEntity<>(userResponseDto, HttpStatus.ACCEPTED);
